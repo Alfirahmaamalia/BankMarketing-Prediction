@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+
+{% block title %}Prediksi | Bank Marketing Analytics{% endblock %}
+
+{% block content %}
+<div class="container fade-in">
+    <!-- Header Page dihilangkan karena di UI baru langsung kotak dengan banner -->
+
+    <div class="prediction-layout mt-4">
+        <div class="prediction-form-card mx-auto">
+            
+            <div class="form-banner">
+                <div class="form-banner-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="form-banner-content">
+                    <h2>Mesin Prediksi Berlangganan</h2>
+                    <p>Silakan operasikan parameter nasabah di bawah ini. kami Menggunakan Random Forest untuk menimbang probabilitas berlangganan deposito.</p>
+                </div>
+            </div>
+            
+            {% if error_message %}
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle"></i> {{ error_message }}
+            </div>
+            {% endif %}
+
+            <form action="/predict" method="POST" id="predictForm">
+                <div class="form-grid">
+                    <!-- Umur -->
+                    <div class="form-group">
+                        <label for="age">
+                            <div class="form-label-title">Age</div>
+                            <div class="form-label-subtitle">Age of the customer</div>
+                        </label>
+                        <input type="number" id="age" name="age" class="form-control" placeholder="Contoh: 35" min="18" max="100" required>
+                    </div>
+
+                    <!-- Pekerjaan -->
+                    <div class="form-group">
+                        <label for="job">
+                            <div class="form-label-title">Job Role</div>
+                            <div class="form-label-subtitle">The specific role or job title of the customer</div>
+                        </label>
+                        <select id="job" name="job" class="form-control" required>
+                            <option value="" disabled selected>Pilih JobRole</option>
+                            <option value="admin.">Admin</option>
+                            <option value="blue-collar">Blue-collar</option>
+                            <option value="entrepreneur">Entrepreneur</option>
+                            <option value="housemaid">Housemaid</option>
+                            <option value="management">Management</option>
+                            <option value="retired">Retired</option>
+                            <option value="self-employed">Self-employed</option>
+                            <option value="services">Services</option>
+                            <option value="student">Student</option>
+                            <option value="technician">Technician</option>
+                            <option value="unemployed">Unemployed</option>
+                            <option value="unknown">Unknown</option>
+                        </select>
+                    </div>
+
+                    <!-- Status Pernikahan -->
+                    <div class="form-group">
+                        <label for="marital">
+                            <div class="form-label-title">Marital Status</div>
+                            <div class="form-label-subtitle">Current marital status of the customer</div>
+                        </label>
+                        <select id="marital" name="marital" class="form-control" required>
+                            <option value="" disabled selected>Pilih Status</option>
+                            <option value="divorced">Cerai</option>
+                            <option value="married">Menikah</option>
+                            <option value="single">Belum Menikah</option>
+                            <option value="unknown">Tidak Diketahui</option>
+                        </select>
+                    </div>
+
+                    <!-- Pendidikan -->
+                    <div class="form-group">
+                        <label for="education">
+                            <div class="form-label-title">Education</div>
+                            <div class="form-label-subtitle">Educational level of the customer</div>
+                        </label>
+                        <select id="education" name="education" class="form-control" required>
+                            <option value="" disabled selected>Pilih Education</option>
+                            <option value="primary">SD</option>
+                            <option value="secondary">SMP/SMA</option>
+                            <option value="tertiary">Perguruan Tinggi</option>
+                            <option value="unknown">Tidak Diketahui</option>
+                        </select>
+                    </div>
+
+                    <!-- Saldo -->
+                    <div class="form-group">
+                        <label for="balance">
+                            <div class="form-label-title">Yearly Balance</div>
+                            <div class="form-label-subtitle">Average yearly balance in euros</div>
+                        </label>
+                        <input type="number" id="balance" name="balance" class="form-control" placeholder="Contoh: 1500" required>
+                    </div>
+
+                    <!-- Pinjaman Rumah -->
+                    <div class="form-group">
+                        <label for="housing">
+                            <div class="form-label-title">Housing Loan</div>
+                            <div class="form-label-subtitle">Does the customer have a housing loan?</div>
+                        </label>
+                        <select id="housing" name="housing" class="form-control" required>
+                            <option value="" disabled selected>Pilih Status</option>
+                            <option value="yes">Ya</option>
+                            <option value="no">Tidak</option>
+                            <option value="unknown">Tidak Diketahui</option>
+                        </select>
+                    </div>
+
+                    <!-- Pinjaman Pribadi -->
+                    <div class="form-group">
+                        <label for="loan">
+                            <div class="form-label-title">Personal Loan</div>
+                            <div class="form-label-subtitle">Does the customer have a personal loan?</div>
+                        </label>
+                        <select id="loan" name="loan" class="form-control" required>
+                            <option value="" disabled selected>Pilih Status</option>
+                            <option value="yes">Ya</option>
+                            <option value="no">Tidak</option>
+                            <option value="unknown">Tidak Diketahui</option>
+                        </select>
+                    </div>
+
+                    <!-- Durasi Panggilan -->
+                    <div class="form-group">
+                        <label for="duration">
+                            <div class="form-label-title">Call Duration</div>
+                            <div class="form-label-subtitle">Last contact duration, in seconds</div>
+                        </label>
+                        <input type="number" id="duration" name="duration" class="form-control" placeholder="Contoh: 250" min="0" required>
+                    </div>
+
+                    <!-- Jumlah Kampanye -->
+                    <div class="form-group">
+                        <label for="campaign">
+                            <div class="form-label-title">Campaign Contacts</div>
+                            <div class="form-label-subtitle">Number of contacts performed during this campaign</div>
+                        </label>
+                        <input type="number" id="campaign" name="campaign" class="form-control" placeholder="Contoh: 2" min="1" required>
+                    </div>
+                </div>
+
+                <div class="form-actions mt-4 text-center">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <i class="fas fa-magic"></i> Prediksi Sekarang
+                    </button>
+                    <button type="button" class="btn btn-outline" onclick="fillRandomData()">
+                        <i class="fas fa-dice"></i> Isi Data Acak
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        {% if prediction %}
+        <div class="result-container mt-5 fade-in mx-auto">
+            <div class="result-card">
+                <div class="result-banner {% if prediction == 'yes' %}success-banner{% else %}danger-banner{% endif %}">
+                    <h3 class="banner-title">Kalkulasi : {{ prediction_label }}</h3>
+                    <p class="banner-decision">Keputusan Akhir: {{ "Subscribed" if prediction == "yes" else "No Subscription" }}</p>
+                    <div class="badge-wrapper">
+                        <span class="probability-badge">Probability: {{ probability }}</span>
+                    </div>
+                </div>
+
+                {% if metrics %}
+                <div class="metrics-section mt-4">
+                    <h4 class="metrics-header"><i class="fas fa-bars-staggered"></i> Metrik Keandalan Algoritma:</h4>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <span class="metric-title">ACCURACY</span>
+                            <span class="metric-value">{{ metrics.accuracy }}</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-title">PRECISION</span>
+                            <span class="metric-value">{{ metrics.precision }}</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-title">F1 SCORE</span>
+                            <span class="metric-value">{{ metrics.f1_score }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="text-center mt-4 mb-5">
+                <button class="btn btn-secondary" onclick="document.getElementById('predictForm').reset(); document.querySelector('.result-container').style.display='none';">
+                    <i class="fas fa-redo"></i> Prediksi Nasabah Lain
+                </button>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    function fillRandomData() {
+        const jobs = ["admin.", "blue-collar", "entrepreneur", "housemaid", "management", "retired", "self-employed", "services", "student", "technician", "unemployed", "unknown"];
+        const maritals = ["divorced", "married", "single"];
+        const educations = ["primary", "secondary", "tertiary", "unknown"];
+        const yesNo = ["yes", "no"];
+
+        document.getElementById('age').value = Math.floor(Math.random() * (60 - 25 + 1)) + 25;
+        document.getElementById('job').value = jobs[Math.floor(Math.random() * jobs.length)];
+        document.getElementById('marital').value = maritals[Math.floor(Math.random() * maritals.length)];
+        document.getElementById('education').value = educations[Math.floor(Math.random() * educations.length)];
+        document.getElementById('balance').value = Math.floor(Math.random() * 5000) - 500;
+        document.getElementById('housing').value = yesNo[Math.floor(Math.random() * yesNo.length)];
+        document.getElementById('loan').value = yesNo[Math.floor(Math.random() * yesNo.length)];
+        document.getElementById('duration').value = Math.floor(Math.random() * 600) + 10;
+        document.getElementById('campaign').value = Math.floor(Math.random() * 5) + 1;
+        
+        // Scroll to submit button smoothly
+        document.getElementById('submitBtn').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+</script>
+{% endblock %}

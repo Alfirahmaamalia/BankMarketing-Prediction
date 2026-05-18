@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Beranda | Bank Marketing Analytics{% endblock %}
+
+{% block content %}
+<div class="container fade-in">
+    <div class="prediction-layout mt-4">
+        <div class="prediction-form-card mx-auto">
+            
+            <!-- Top Info Banner -->
+            <div class="home-info-banner mb-4">
+                <h3>Data Science Bank Marketing Analyze</h3>
+                <p>Identifikasi probabilitas berlangganan nasabah menggunakan kekuatan Machine Learning dengan model Random Forest. Sistem ini membantu tim pemasaran mengenali pola dan faktor risiko utama melalui workflow yang rapi, cepat, dan mudah digunakan untuk menjaga stabilitas keberhasilan kampanye.</p>
+            </div>
+
+            <!-- Main Hero Banner -->
+            <div class="home-hero-banner">
+                <h1 class="hero-main-title">Dashboard Prediksi<br>Berlangganan Nasabah</h1>
+                <div class="hero-divider"></div>
+                <div class="hero-actions">
+                    <a href="/predict" class="btn hero-btn-primary">
+                        <i class="fas fa-brain"></i> MULAI ANALISIS
+                    </a>
+                    <a href="/dashboard" class="btn hero-btn-outline">
+                        LIHAT DASHBOARD
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
