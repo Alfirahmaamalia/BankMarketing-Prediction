@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="dash-wrapper-card">
-    
+
     <!-- Premium Dashboard Header -->
     <div class="dash-header">
         <div class="dash-header-content">
@@ -12,11 +12,7 @@
             </div>
             <div class="texts">
                 <h1>Pusat Kontrol Visualisasi Data</h1>
-                <p>Jelajahi sajian infografis dari penyebaran usia nasabah, saldo rata-rata, dan korelasi tingkat keberhasilan kampanye (*subscription*) melalui Google Looker Studio Integrations.</p>
             </div>
-        </div>
-        <div class="live-tag">
-            <i class="fas fa-circle live-dot"></i> LIVE ANALYTICS
         </div>
     </div>
 
@@ -24,14 +20,17 @@
     <div class="dashboard-container">
         <!-- Tautan langsung sebagai cadangan karena link /s/ diblokir oleh Google untuk iframe -->
         <div style="text-align: center; margin-bottom: 20px;">
-            <a href="https://datastudio.google.com/reporting/982c6a2f-0f9a-44a4-8be4-3cda279306c2" target="_blank" style="background-color: white; color: #0d9488; border: 2px solid #0d9488; padding: 10px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; display: inline-block;">
+            <a href="https://datastudio.google.com/reporting/982c6a2f-0f9a-44a4-8be4-3cda279306c2" target="_blank"
+                style="background-color: #0f172a; color: #d4a843; border: 2px solid #d4a843; padding: 10px 20px; border-radius: 8px; font-weight: bold; text-decoration: none; display: inline-block;">
                 <i class="fas fa-external-link-alt"></i> Buka Dashboard Looker Studio di Tab Baru
             </a>
         </div>
 
         <div class="iframe-wrapper">
-            <iframe width="100%" height="900" src="https://lookerstudio.google.com/embed/reporting/982c6a2f-0f9a-44a4-8be4-3cda279306c2" 
-                frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation allow-popups">
+            <iframe width="100%" height="900"
+                src="https://lookerstudio.google.com/embed/reporting/982c6a2f-0f9a-44a4-8be4-3cda279306c2"
+                frameborder="0" style="border:0" allowfullscreen
+                sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-top-navigation allow-popups">
             </iframe>
         </div>
     </div>
@@ -39,116 +38,96 @@
 </div>
 
 <style>
-body {
-    background-color: #f0fdfa; /* Super light teal base */
-    margin: 0;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-}
+    body {
+        background-color: #faf8f3;
+        margin: 0;
+        font-family: 'Inter', 'Segoe UI', sans-serif;
+    }
 
-main {
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 20px 0;
-}
+    main,
+    .main-content {
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 20px 1.5rem;
+    }
 
-.dash-wrapper-card {
-    background-color: white;
-    margin: 10px auto;
-    border-radius: 20px;
-    border: 1px solid #ccfbf1;
-    box-shadow: 0 10px 25px -5px rgba(13, 148, 136, 0.1);
-    padding: 30px;
-}
+    .dash-wrapper-card {
+        background-color: white;
+        margin: 10px auto;
+        border-radius: 20px;
+        border: 1px solid #e2d9c8;
+        box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+        padding: 30px;
+    }
 
-.dash-header {
-    background: linear-gradient(135deg, #ccfbf1 0%, #99f6e4 100%);
-    border: 1px solid #5eead4;
-    border-radius: 12px;
-    padding: 25px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 6px -1px rgba(20, 184, 166, 0.2);
-}
-
-.dash-header-content {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.icon-bulb {
-    background: #0d9488;
-    color: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    box-shadow: 0 4px 10px rgba(13, 148, 136, 0.4);
-}
-
-.texts h1 {
-    color: #115e59;
-    margin: 0 0 5px 0;
-    font-size: 26px;
-    font-weight: 800;
-    border: none;
-    padding: 0;
-}
-
-.texts p {
-    color: #0f766e;
-    margin: 0;
-    font-size: 15px;
-    max-width: 800px;
-}
-
-.live-tag {
-    background-color: rgba(255,255,255,0.8);
-    padding: 8px 16px;
-    border-radius: 20px;
-    color: #0f766e;
-    font-weight: 700;
-    font-size: 13px;
-    border: 1px solid #5eead4;
-}
-
-.live-dot {
-    color: #10b981;
-    font-size: 10px;
-    margin-right: 5px;
-    animation: blinker 1.5s linear infinite;
-}
-
-@keyframes blinker {
-    50% { opacity: 0; }
-}
-
-.dashboard-container {
-    padding: 0 !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-}
-
-.iframe-wrapper {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08); /* More popping shadow */
-    padding: 0;
-    overflow: hidden; /* Makes iframe corners round with the wrapper */
-    border: 1px solid #e2e8f0;
-}
-
-@media (max-width: 768px) {
     .dash-header {
-        flex-direction: column;
-        align-items: flex-start;
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        border: 1px solid #334155;
+        border-radius: 12px;
+        padding: 25px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+    }
+
+    .dash-header-content {
+        display: flex;
+        align-items: center;
         gap: 20px;
     }
-}
+
+    .icon-bulb {
+        background: #d4a843;
+        color: #0f172a;
+        width: 60px;
+        height: 60px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        box-shadow: 0 4px 10px rgba(212, 168, 67, 0.3);
+    }
+
+    .texts h1 {
+        color: #ffffff;
+        margin: 0 0 5px 0;
+        font-size: 26px;
+        font-weight: 800;
+        border: none;
+        padding: 0;
+    }
+
+    .texts p {
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0;
+        font-size: 15px;
+        max-width: 800px;
+    }
+
+    .dashboard-container {
+        padding: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .iframe-wrapper {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        padding: 0;
+        overflow: hidden;
+        border: 1px solid #e2d9c8;
+    }
+
+    @media (max-width: 768px) {
+        .dash-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+        }
+    }
 </style>
 {% endblock %}

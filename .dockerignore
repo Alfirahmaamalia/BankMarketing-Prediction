@@ -8,8 +8,5 @@ venv/
 .env
 mlruns/
 mlartifacts/
-models/
-*.csv
-*.txt
 *.docx
 .git/
