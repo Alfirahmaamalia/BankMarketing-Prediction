@@ -2,8 +2,6 @@ import sys
 import os
 import numpy as np
 import pandas as pd
-import mlflow
-import mlflow.sklearn
 from dotenv import load_dotenv
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
@@ -26,12 +24,14 @@ os.environ["MLFLOW_TRACKING_PASSWORD"] = DAGSHUB_TOKEN
 
 MLFLOW_TRACKING_URI = f"https://dagshub.com/Alfirahmaamalia/BankMarketing-Prediction.mlflow"
 EXPERIMENT_NAME = "BankMarketing-Prediction"
-DATA_PATH = os.getenv("DATA_PATH", "bank_marketing_final.csv")
-MODEL_PATH = os.getenv("MODEL_PATH", "models/model.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.getenv("DATA_PATH", os.path.join(BASE_DIR, "bank_marketing_final.csv"))
+MODEL_PATH = os.getenv("MODEL_PATH", os.path.join(BASE_DIR, "models", "model.pkl"))
 
 def setup_mlflow():
     """Setup tracking URI to DagsHub"""
     try:
+        import mlflow
         mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
         print(f"MLflow connected to: {MLFLOW_TRACKING_URI}")
     except Exception as e:
@@ -81,6 +81,8 @@ def preprocess_data(df):
 def train_model(X, y, test_size=0.2, random_state=42):
     """Train Random Forest model with MLflow Tracking to DagsHub"""
     try:
+        import mlflow
+        import mlflow.sklearn
         setup_mlflow()
         mlflow.set_experiment(EXPERIMENT_NAME)
         

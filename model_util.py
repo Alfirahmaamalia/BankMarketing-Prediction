@@ -8,7 +8,8 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-LOCAL_MODEL_PATH = os.getenv("LOCAL_MODEL_PATH", "models/model.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOCAL_MODEL_PATH = os.getenv("LOCAL_MODEL_PATH", os.path.join(BASE_DIR, "models", "model.pkl"))
 
 def load_model_from_local(model_path: str = None):
     """
