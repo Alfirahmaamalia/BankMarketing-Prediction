@@ -84,9 +84,9 @@ def predict_view():
                         
                     # Hardcoded metrics for the Balanced Model
                     metrics = {
-                        "accuracy": "0.8980",
-                        "precision": "0.5518",
-                        "f1_score": "0.6113"
+                        "accuracy": "0.898042684",
+                        "precision": "0.551750380",
+                        "f1_score": "0.611298482"
                     }
                         
                 except ImportError:
